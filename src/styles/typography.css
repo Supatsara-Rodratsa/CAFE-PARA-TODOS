@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;800&display=swap");
+body {
+  /* font-family: "Abril Fatface", cursive; */
+  /* font-family: "Libre Baskerville", serif; */
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+}
+
+h1 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 60px;
+  color: var(--light_font);
+}
+
+/* tablet */
+@media only screen and (max-width: 800px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 30px;
+  }
+}

@@ -1,0 +1,37 @@
+.nav-bar-container {
+  position: relative;
+}
+.layout {
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  z-index: 99;
+}
+
+.right-items:not(:last-child) {
+  margin-right: 20px;
+}
+
+.logo-container {
+  max-width: 200px;
+  cursor: pointer;
+}
+
+.right-items {
+  cursor: pointer;
+}
+
+.logo:hover {
+  filter: drop-shadow(2px 3px 5px rgba(0, 0, 0, 0.4));
+  transform: rotateY(360deg);
+  transition: transform 3s ease-in-out;
+}
+
+.items {
+  color: white;
+}
+
+.right-items:hover {
+  text-shadow: 2px 3px 5px rgba(0, 0, 0, 0.4);
+}
