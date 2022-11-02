@@ -3,6 +3,7 @@
   --primary_color: #aca69d;
   --secondary_color: #f5f3f0;
   --dark-brown: #8a6953;
+  --dark-brown-2: #382E1F;
   --brown: #ab9587;
   --light_base: #d7d0c7;
   --dark: #535353;
@@ -13,4 +14,5 @@
   --light_font: #fffcf3;
   --dark_font: #8c8980;
   --light_brown: #efd7c7;
+  --light-gray: #D9D9D9;
 }
