@@ -36,8 +36,14 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   ngAfterViewInit(): void {
-    this.circleStatus = document.querySelectorAll(".circle");
-    this.circleStatus.item(0).classList.add("active-circle");
+    this.screenWidth = window.innerWidth;
+    if (this.screenWidth >= 600) {
+      this.circleStatus = document.querySelectorAll(".show-bigger-screen .circle");   
+    } else {
+      this.circleStatus = document.querySelectorAll(".show-smaller-screen .circle");   
+    }
+    
+    this.circleStatus?.item(0).classList.add("active-circle");
   }
 
   onClickPrevSlide() {
@@ -67,6 +73,12 @@ export class CarouselComponent implements OnInit, OnDestroy, AfterViewInit{
 
   onResize(event: any) {
     this.screenWidth = event.target.innerWidth;
+    if (this.screenWidth && this.screenWidth < 600) {
+      this.circleStatus = document.querySelectorAll(".show-smaller-screen .circle");   
+    } else {
+      this.circleStatus = document.querySelectorAll(".show-bigger-screen .circle");   
+    }
+    this.circleStatus.item(0).classList.add("active-circle");
   }
 
   switchSlide() {

@@ -18,15 +18,62 @@ h2 {
   color: var(--light_font);
 }
 
+h3 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 30px;
+  color: var(--light_font);
+}
+
+h4 {
+  font-family: "Abril Fatface", cursive;
+  font-size: 18px;
+  color: var(--primary_color);
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 12px;
+}
+
 /* tablet */
 @media only screen and (max-width: 800px) {
   h1 {
     font-size: 40px;
   }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 10px;
+  }
 }
 
 @media only screen and (max-width: 600px) {
   h1 {
-    font-size: 30px;
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
   }
 }

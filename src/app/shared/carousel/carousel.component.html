@@ -61,8 +61,12 @@
   <button class="button next center">
     <img src="assets/icons/next.svg" alt="previous icon" class="icon" (click)="onClickNextSlide()"/>
   </button>
-  <div id="current-status" class="outline-layout status-center">
+  <div id="current-status" class="outline-layout status-center show-bigger-screen">
     <div class="flex-row status-center center" [innerHtml]="renderHTML | safeHtml">
     </div>
+  </div>  
+</div>
+<div id="current-status" class="outline-layout status-center show-smaller-screen">
+  <div class="flex-row status-center center" [innerHtml]="renderHTML | safeHtml">
   </div>
 </div>
