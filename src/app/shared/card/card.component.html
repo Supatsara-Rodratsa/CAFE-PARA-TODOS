@@ -1,23 +1,19 @@
-<div class="card-container flex-col">
-    <!-- image section -->
+<div class="card-container flex-col" *ngIf="product">
     <div class="highlight-image">
-        <!-- <img [src]="img"> -->
-        <img src="assets/sample-coffee/Signature-Chocolate.png" alt="Highlight Menu"  />
+        <img [src]="product.decodeImage" alt="Highlight Menu">
     </div>
     <div class="flex-col space-between full-height">
-        <!-- contents -->
         <div class="flex-col">
             <h4 class="card-header">
-                Classic Chocolate
+                {{product.name}}
             </h4>
             <p>
-                Milk and bittersweet chocolate with whipped cream and chocolate sauce.
+                {{product.details}}
             </p>
         </div>
-        <!-- price -->
         <div class="flex-row space-between price-section">
             <p >Price</p>
-            <p>&#x20AC;3.50</p>
+            <p>&#x20AC;{{product.price | number : '1.2-2'}}</p>
         </div>
     </div>
 </div>

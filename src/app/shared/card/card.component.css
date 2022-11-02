@@ -37,6 +37,7 @@
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    height: 50px;
 }
 
 .card-container p {
@@ -81,6 +82,17 @@
     
     .price-section p {
         font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .card-container h4 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: 40px;
     }
 }
 

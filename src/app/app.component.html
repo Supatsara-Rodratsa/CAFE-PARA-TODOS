@@ -5,19 +5,19 @@
     <h3 class="header">Highlight Menu</h3>
     <div class="card-details">
       <div class="flex-row">
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
+        <div *ngFor="let product of highlightProducts.value">
+          <app-card [product]="product"></app-card>
+        </div>
       </div>
     </div>
   </section>
-  <section class="categories-section mg-top-50">
+  <section class="categories-section">
     <h3 class="header">Categories</h3>
+    <div class="flex-row center">
+      <div *ngFor="let category of categories.value">
+        <app-tab-card [category]="category" (selectedCategory)="onSelectedCategory($event)"></app-tab-card>
+      </div>
+    </div>
   </section>
 </div>
 
