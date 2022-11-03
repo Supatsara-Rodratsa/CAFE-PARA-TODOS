@@ -1,39 +1,40 @@
-<app-nav-bar></app-nav-bar>
-<div class="flex-col">
-  <app-carousel></app-carousel>
-  <section class="mg-top-50 highlight-layout">
-    <h3 class="header">Highlight Menu</h3>
-    <div class="card-details">
-      <div class="flex-row mrg-lr-30">
-        <div *ngFor="let product of highlightProducts.value">
-          <app-card [product]="product" [highlightMenu]="true"></app-card>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="categories-section">
-    <h3 class="header">Categories</h3>
-    <div class="flex-row center">
-      <div *ngFor="let category of categories.value">
-        <app-tab-card [category]="category" (selectedCategory)="onSelectedCategory($event)"></app-tab-card>
-      </div>
-    </div>
-  </section>
-  <section class="products-section">
-    <div class="flex--col"  *ngFor="let element of renderProductsSection.value">
-      <div class="flex-row space-between align-end sub-categories">
-        <h3 class="header">{{element.name}}</h3>
-        <p *ngIf="element.id && element.name" (click)="openModal(element.id, element.name)">Add Product</p>
-      </div>
-      <div class="container">
-        <div class="grid">
-          <div *ngFor="let product of element.products">
-            <app-card [product]="product"></app-card>
+<app-loading *ngIf="isLoading"></app-loading>
+<div *ngIf="!isLoading || !starting">
+  <app-nav-bar></app-nav-bar>
+  <div class="flex-col">
+    <app-carousel data-aos="fade-down" data-aos-duration="3000"></app-carousel>
+    <section class="mg-top-50 highlight-layout">
+      <h3 class="header" data-aos="flip-up" data-aos-duration="3000">Highlight Menu</h3>
+      <div class="card-details">
+        <div class="flex-row mrg-lr-30" data-aos="flip-up" data-aos-duration="3000">
+          <div *ngFor="let product of highlightProducts.value">
+            <app-card [product]="product" [highlightMenu]="true"></app-card>
           </div>
         </div>
       </div>
-    </div>
-
-  </section>
+    </section>
+    <section class="categories-section">
+      <h3 class="header" data-aos="fade-up" data-aos-duration="3000" >Categories</h3>
+      <div class="flex-row center">
+        <div *ngFor="let category of categories.value">
+          <app-tab-card data-aos="fade-up" data-aos-duration="3000" [category]="category" (selectedCategory)="onSelectedCategory($event)"></app-tab-card>
+        </div>
+      </div>
+    </section>
+    <section class="products-section">
+      <div class="flex--col"  *ngFor="let element of renderProductsSection.value">
+        <div class="flex-row space-between align-end sub-categories">
+          <h3 class="header" data-aos="fade-right">{{element.name}}</h3>
+          <p *ngIf="element.id && element.name" (click)="openModal(element.id, element.name)" data-aos="fade-left">Add Product</p>
+        </div>
+        <div class="container" *ngIf="element.id && element.name">
+          <div class="grid" data-aos="zoom-in" data-aos-duration="2000">
+            <div *ngFor="let product of element.products">
+              <app-card [product]="product" (deleteItem)="getDeletedProduct($event, element.id)" (modifyItem)="getModifyItem(element.id, element.name, $event)"></app-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>  
 </div>
-

@@ -1,10 +1,12 @@
-import { Component, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Component, OnInit, OnDestroy, ViewEncapsulation, ChangeDetectorRef } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { CoffeeHandlerService } from './shared/services/coffee-handler.service';
 import { Category, CategoryDTO, Product, SubCategory } from './shared/services/coffee.interface';
 import { UtilitiesService } from './shared/services/utilities.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from './shared/dialog/dialog.component';
+import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
+import * as Aos from 'aos';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +20,20 @@ export class AppComponent implements OnInit, OnDestroy {
   public highlightProducts = new BehaviorSubject<Product[] | null>(null);
   public categories = new BehaviorSubject<CategoryDTO[] | null>(null);
   public renderProductsSection = new BehaviorSubject<SubCategory[] | null>(null);
+  public currentCategory: string = "Hot Drink";
+  public isLoading = false;
+  public starting = true;
 
   constructor(
     private coffeeHandlerService: CoffeeHandlerService,
     private utilitiesService : UtilitiesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cdRef:ChangeDetectorRef
   ) {}
 
   async ngOnInit(): Promise<void> {
+    this.load();
+    Aos.init();
     await Promise.all([
       this.getHighlightMenu(),
       this.getAllCategories()
@@ -35,6 +43,14 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.highlightProducts.unsubscribe();
     this.categories.unsubscribe();
+  }
+
+  load() : void {
+    this.isLoading = true;
+    setTimeout( () => {
+      this.isLoading = false;
+      this.starting = false
+    }, 2000 );
   }
 
   async getHighlightMenu() {
@@ -67,29 +83,101 @@ export class AppComponent implements OnInit, OnDestroy {
 
   onSelectedCategory(event: CategoryDTO) {
     if (event && event.name) {
+      this.currentCategory = event.name;
       this.renderProductsSection.next(this.utilitiesService.getSubCategoriesByCategoryName(event.name));
     }
   }
 
-  openModal(subCategoryId: number, subCategoryName: string) {
+  openModal(subCategoryId: number, subCategoryName: string, product?: Product) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width ='600px';
-    // dialogConfig.height = '300px';
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       id: subCategoryId,
-      name: subCategoryName
+      name: subCategoryName,
+      product: product
     };
     dialogConfig.enterAnimationDuration= "1000ms";
     dialogConfig.exitAnimationDuration= "1000ms";
 
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 
-    dialogRef.afterClosed().subscribe(result => {
-    console.log('Dialog was closed')
-    console.log(result)
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result != 'cancel') {
+        let newProduct: Product = result.product;
+        let isNewProduct: boolean = result.isNewProduct;
+        if (isNewProduct) {
+          await this.coffeeHandlerService.addNewProduct(newProduct);
+        } else {
+          if (product && product.id) {
+            await this.coffeeHandlerService.modifyProduct(product.id, newProduct);
+          }
+        }
+        this.load();
+        setTimeout(() => this.updateProductList(subCategoryId), 500);
+      }
 
+    });
+  }
+
+  getModifyItem(subCategoryId: number, subCategoryName: string, event: Product) {
+    this.openModal(subCategoryId, subCategoryName, event);
+  }
+
+  openConfirmDialog(productId: number, subCategoryId: number) {
+    let remove: boolean = false;
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width ='450px';
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.enterAnimationDuration= "1000ms";
+    dialogConfig.exitAnimationDuration= "500ms";
+
+    const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result != 'cancel') {
+        remove = true;
+        await this.coffeeHandlerService.removeProduct(productId);
+        this.load();
+        setTimeout(() => this.updateProductList(subCategoryId), 500);
+      }
+    });
+  }
+
+  getDeletedProduct(productId: number, subCategoryId: number) {
+    this.openConfirmDialog(productId, subCategoryId);
+  }
+
+  updateProductList(subCategoryId: number) {
+    let newSubCategories: SubCategory[] = [];
+    let updateProduct: Product[] = [];
+    let subCategories: SubCategory[] = this.utilitiesService.getSubCategoriesByCategoryName(this.currentCategory) || [];
+    let subcategory = subCategories.find(val => val.id === subCategoryId);
+    this.coffeeHandlerService.getNewProductBySubCategoryId(subCategoryId).subscribe((product: Product[])=> { 
+      product.forEach(item => {
+        updateProduct.push({
+          ...item, 
+          decodeImage: this.utilitiesService.decodeBase64image(item.image)
+        });
+      });
+
+      subcategory = {
+        ...subcategory,
+        products: [...updateProduct]
+      }
+
+      subCategories.forEach(val => {
+        if (val.id == subCategoryId && subcategory) {
+          newSubCategories.push(subcategory)
+        } else {
+          newSubCategories.push(val);
+        }
+      });
+
+      this.utilitiesService.setSubCategoriesByCategoryName(this.currentCategory, newSubCategories);
+      this.renderProductsSection.next(this.utilitiesService.getSubCategoriesByCategoryName(this.currentCategory));      
     });
   }
 

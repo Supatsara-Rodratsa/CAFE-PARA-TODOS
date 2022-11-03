@@ -10,11 +10,13 @@ import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
-    declarations: [NavBarComponent, CarouselComponent, SafeHtmlPipe, CardComponent, TabCardComponent, DialogComponent],
+    declarations: [NavBarComponent, CarouselComponent, SafeHtmlPipe, CardComponent, TabCardComponent, DialogComponent, DeleteDialogComponent, LoadingComponent],
     imports: [CommonModule, HttpClientModule, MatDialogModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
-    exports: [NavBarComponent, CarouselComponent, SafeHtmlPipe, CardComponent, TabCardComponent],
+    exports: [NavBarComponent, CarouselComponent, SafeHtmlPipe, CardComponent, TabCardComponent, LoadingComponent],
     providers: [HttpClient, SafeHtmlPipe],
     entryComponents: [DialogComponent]
 })

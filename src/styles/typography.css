@@ -95,4 +95,8 @@ label {
   .text-tab-card {
     font-size: 10px;
   }
+
+  .header {
+    font-size: 20px !important;
+  }
 }

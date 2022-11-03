@@ -57,4 +57,8 @@ export class UtilitiesService {
   getSubCategoriesByCategoryName(name: string) {
     return this.categoriesMapping[name] ? this.categoriesMapping[name] : null;
   }
+
+  setSubCategoriesByCategoryName(name: string, newValue: SubCategory[]) {
+    this.categoriesMapping[name] = newValue;
+  }
 }

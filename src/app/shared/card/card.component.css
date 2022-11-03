@@ -86,6 +86,11 @@
     color: var(--dark-brown-2);
 }
 
+.button-section button:hover {
+    background-color: var(--dialog-bg);
+    color: var(--dark-brown-2)
+}
+
 .product-details {
     max-height: 45px;
     white-space: nowrap;

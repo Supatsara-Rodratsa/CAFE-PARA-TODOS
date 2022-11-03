@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UtilitiesService } from '../services/utilities.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Product } from '../services/coffee.interface';
 
 @Component({
   selector: 'app-dialog',
@@ -16,13 +16,19 @@ export class DialogComponent implements OnInit {
   public message: string = '';
   public url: any | undefined;
   public img: any = null;
+  public newProduct: Product | undefined;
+  public modifyProduct: Product | undefined;
+  public wording: string = 'Add New Product Details';
   
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private utilitiesService: UtilitiesService
+    private dialogRef: MatDialogRef<DialogComponent>
   ) {
     this.subCategoryId = data.id;
-    this.subCategoryName = data.name
+    this.subCategoryName = data.name;
+    this.modifyProduct = data.product || null;
+    if (this.modifyProduct) this.wording = 'Modify Product Details';
+    
   }
 
   ngOnInit(): void {
@@ -31,11 +37,35 @@ export class DialogComponent implements OnInit {
 
   initForm() {
     this.form = new FormGroup({
-      name: new FormControl(null, [Validators.required]),
-      details: new FormControl(null, [Validators.required]),
-      price: new FormControl(null, [Validators.required]),
+      name: new FormControl( this.modifyProduct ? this.modifyProduct.name : null, [Validators.required]),
+      details: new FormControl( this.modifyProduct ? this.modifyProduct.details :null, [Validators.required]),
+      price: new FormControl( this.modifyProduct ? this.modifyProduct.price : null, [Validators.required]),
       isHighlightMenu: new FormControl(false)
     });
+  }
+
+  saveButtonClicked() {
+    if (this.form?.touched && !this.form?.invalid) {
+      this.setData();
+      this.dialogRef.close({product: this.newProduct, isNewProduct: this.modifyProduct ? false : true});
+    }
+  }
+
+  cancelButtonClicked() {
+    this.dialogRef.close('cancel');
+  }
+
+  setData() {
+    if (this.form) {
+      this.newProduct = {
+        name: this.form.get('name')?.value,
+        details: this.form.get('details')?.value,
+        price: this.form.get('price')?.value,
+        image: this.modifyProduct && !this.url ? this.modifyProduct.image : this.url.split(";base64,").pop(),
+        subCategoryId: this.subCategoryId,
+        isHighlightMenu: this.modifyProduct ? this.modifyProduct .isHighlightMenu : false
+      }
+    }
   }
 
   onFileSelected(event: any) {
