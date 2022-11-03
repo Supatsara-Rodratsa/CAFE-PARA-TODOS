@@ -4,9 +4,9 @@
   <section class="mg-top-50 highlight-layout">
     <h3 class="header">Highlight Menu</h3>
     <div class="card-details">
-      <div class="flex-row">
+      <div class="flex-row mrg-lr-30">
         <div *ngFor="let product of highlightProducts.value">
-          <app-card [product]="product"></app-card>
+          <app-card [product]="product" [highlightMenu]="true"></app-card>
         </div>
       </div>
     </div>
@@ -18,6 +18,22 @@
         <app-tab-card [category]="category" (selectedCategory)="onSelectedCategory($event)"></app-tab-card>
       </div>
     </div>
+  </section>
+  <section class="products-section">
+    <div class="flex--col"  *ngFor="let element of renderProductsSection.value">
+      <div class="flex-row space-between align-end sub-categories">
+        <h3 class="header">{{element.name}}</h3>
+        <p>Add Product</p>
+      </div>
+      <div class="container">
+        <div class="grid">
+          <div *ngFor="let product of element.products">
+            <app-card [product]="product"></app-card>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 </div>
 

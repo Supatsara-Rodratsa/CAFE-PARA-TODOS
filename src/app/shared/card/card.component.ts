@@ -9,6 +9,7 @@ import { Product } from '../services/coffee.interface';
 export class CardComponent implements OnInit {
 
   @Input() product: Product | undefined;
+  @Input() highlightMenu: boolean = false;
   
   constructor() { }
 

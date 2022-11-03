@@ -66,6 +66,37 @@
 	animation: bounce 2s ease;
 }
 
+.button-section button {
+    width: 100%;
+    margin-top: 15px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    padding: 7px 3px;
+    cursor: pointer;
+}
+
+.button-section button:first-child {
+    margin-right: 10px;
+    background-color: black;
+    color: var(--light_font);
+}
+
+.button-section button:last-child {
+    background-color: white;
+    color: var(--dark-brown-2);
+}
+
+.product-details {
+    max-height: 45px;
+    white-space: nowrap;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
 @media only screen and (max-width: 800px) {
     .highlight-image img {
         width: 80%;

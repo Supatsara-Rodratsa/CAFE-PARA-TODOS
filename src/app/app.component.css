@@ -18,9 +18,10 @@
     color: var(--dark-brown-2);
 }
 
-.categories-section {
+.categories-section, .products-section {
     background-color: var(--dark-brown-2);
-    margin: 0 -30px;
+    padding: 0 30px;
+    margin: -1px -30px 0 -30px;
     padding-bottom: 50px;
 }
 
@@ -36,10 +37,51 @@
 .categories-section app-tab-card:last-child {
     margin-right: 0px;
 }
+
+.products-section .header {
+    font-family: "Manrope", sans-serif;
+    text-align: start;
+    color: var(--light_font);
+    font-weight: lighter;
+}
+
+.grid {
+    justify-content: center;
+    display: grid;
+    grid-gap: 40px;
+    grid-template-columns: repeat(auto-fill, 230px);
+    padding-top: 90px;
+}
+
+.grid>* {
+    height: 350px;
+}
+
+.mrg-lr-30 {
+    margin: 0 30px;
+}
+
+.card-details::-webkit-scrollbar {
+    display: none !important;
+}
+
+.products-section .sub-categories p {
+    font-size: 18px;
+    color: var(--light_font);
+    margin-bottom: 20px;
+    border-bottom: 1pc solid var(--light_font);
+    border-bottom-width: 1px;
+    cursor: pointer;
+}
  
 @media only screen and (max-width: 800px) {
     .categories-section app-tab-card {
         margin-right: 40px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, 200px);
+        grid-gap: 30px;
     }
 
 }
@@ -55,6 +97,10 @@
     }
 
     .categories-section {
+        padding-bottom: 30px;
+    }
+
+    .categories-section, .products-section {
         background-color: var(--primary_color);
     }
 
@@ -64,6 +110,46 @@
 
     .categories-section .header {
         padding: 30px 0px 20px 0px;
+    }
+
+    .categories-section .header, .products-section .header {
         color: var(--dark-brown-2);
+    }
+
+    .products-section .header {
+        padding: 30px 30px 0px 30px;
+    }
+
+    .container {
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    .grid {
+        display: flex !important;
+        flex-direction: row;
+        justify-content: unset !important;
+        grid-gap: 0px;
+        margin: 0 30px
+    }
+
+    .products-section {
+        padding: 0;
+    }
+
+    .products-section ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .grid>* {
+        height: 300px;
+    }
+
+    .products-section .sub-categories p {
+        font-size: 14px;
+        margin-right: 30px;
+        color: var(--dark-brown-2);
+        border-color: var(--dark-brown-2);
     }
 }

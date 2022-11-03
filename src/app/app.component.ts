@@ -16,6 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public highlightProducts = new BehaviorSubject<Product[] | null>(null);
   public categories = new BehaviorSubject<CategoryDTO[] | null>(null);
   public renderProductsSection = new BehaviorSubject<SubCategory[] | null>(null);
+  // public allCurrentProducts: SubCategory[] | null | undefined;
 
   constructor(
     private coffeeHandlerService: CoffeeHandlerService,
@@ -58,12 +59,13 @@ export class AppComponent implements OnInit, OnDestroy {
       }
       this.utilitiesService.setAllCategories(categories);
       this.categories.next(categoriesDTO);
+      this.renderProductsSection.next(this.utilitiesService.getSubCategoriesByCategoryName("Hot Drink"));
     });
   }
 
   onSelectedCategory(event: CategoryDTO) {
     if (event && event.name) {
-      console.log( this.utilitiesService.getSubCategoriesByCategoryName(event.name));
+      this.renderProductsSection.next(this.utilitiesService.getSubCategoriesByCategoryName(event.name));
     }
   }
 

@@ -22,7 +22,20 @@ export class UtilitiesService {
     this.allCategories = categories;
     this.allCategories.forEach(category => {
       category.subCategories.forEach(subCategory => {
-        if(subCategory)  {
+        if(subCategory && subCategory.products)  {
+          let newProduct: Product[] = [];
+          subCategory.products.forEach(product => {
+            newProduct.push({
+              ...product,
+              decodeImage: this.decodeBase64image(product.image)
+            });
+          });
+        
+          subCategory = {
+            ...subCategory,
+            products: newProduct
+          }
+          
           if (this.categoriesMapping[`${category.name}`]) {
             this.categoriesMapping[`${category.name}`].push(subCategory);
           } else {

@@ -7,13 +7,20 @@
             <h4 class="card-header">
                 {{product.name}}
             </h4>
-            <p>
+            <p class="product-details">
                 {{product.details}}
             </p>
         </div>
-        <div class="flex-row space-between price-section">
-            <p >Price</p>
-            <p>&#x20AC;{{product.price | number : '1.2-2'}}</p>
+        <div class="flex-col">
+            <div class="flex-row space-between price-section">
+                <p >Price</p>
+                <p>&#x20AC;{{product.price | number : '1.2-2'}}</p>
+            </div>
+            <div class="flex-row button-section" *ngIf="!highlightMenu">
+                <button>Delete</button>
+                <button>Edit</button>
+            </div>
         </div>
+        
     </div>
 </div>
