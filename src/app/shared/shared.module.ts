@@ -12,11 +12,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeleteDialogComponent } from './delete-dialog/delete-dialog.component';
 import { LoadingComponent } from './loading/loading.component';
+import { ConnectionErrorComponent } from './connection-error/connection-error.component';
 
 @NgModule({
-    declarations: [NavBarComponent, CarouselComponent, SafeHtmlPipe, CardComponent, TabCardComponent, DialogComponent, DeleteDialogComponent, LoadingComponent],
+    declarations: [NavBarComponent, CarouselComponent, SafeHtmlPipe, CardComponent, TabCardComponent, DialogComponent, DeleteDialogComponent, LoadingComponent, ConnectionErrorComponent],
     imports: [CommonModule, HttpClientModule, MatDialogModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
-    exports: [NavBarComponent, CarouselComponent, SafeHtmlPipe, CardComponent, TabCardComponent, LoadingComponent],
+    exports: [NavBarComponent, CarouselComponent, SafeHtmlPipe, CardComponent, TabCardComponent, LoadingComponent, ConnectionErrorComponent],
     providers: [HttpClient, SafeHtmlPipe],
     entryComponents: [DialogComponent]
 })

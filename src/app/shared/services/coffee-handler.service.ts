@@ -70,7 +70,7 @@ export class CoffeeHandlerService {
     })
   }
 
-  public checkDatabaseConnection() {
+  public checkNoDatabaseConnection() {
     return this.noDatabaseConnection;
   }
 

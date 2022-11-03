@@ -7,6 +7,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogComponent } from './shared/dialog/dialog.component';
 import { DeleteDialogComponent } from './shared/delete-dialog/delete-dialog.component';
 import * as Aos from 'aos';
+import { ConnectionErrorComponent } from './shared/connection-error/connection-error.component';
 
 @Component({
   selector: 'app-root',
@@ -107,15 +108,19 @@ export class AppComponent implements OnInit, OnDestroy {
       if (result != 'cancel') {
         let newProduct: Product = result.product;
         let isNewProduct: boolean = result.isNewProduct;
-        if (isNewProduct) {
-          await this.coffeeHandlerService.addNewProduct(newProduct);
+        if (this.coffeeHandlerService.checkNoDatabaseConnection()) {
+          this.openConnectionError();
         } else {
-          if (product && product.id) {
-            await this.coffeeHandlerService.modifyProduct(product.id, newProduct);
+          if (isNewProduct) {
+            await this.coffeeHandlerService.addNewProduct(newProduct);
+          } else {
+            if (product && product.id) {
+              await this.coffeeHandlerService.modifyProduct(product.id, newProduct);
+            }
           }
+          this.load();
+          setTimeout(() => this.updateProductList(subCategoryId), 500);
         }
-        this.load();
-        setTimeout(() => this.updateProductList(subCategoryId), 500);
       }
 
     });
@@ -125,23 +130,32 @@ export class AppComponent implements OnInit, OnDestroy {
     this.openModal(subCategoryId, subCategoryName, event);
   }
 
-  openConfirmDialog(productId: number, subCategoryId: number) {
-    let remove: boolean = false;
+  getDialogConfigForSmallScreen(): MatDialogConfig {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width ='450px';
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.enterAnimationDuration= "1000ms";
     dialogConfig.exitAnimationDuration= "500ms";
+    return dialogConfig;
+  }
 
-    const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
+  openConnectionError() {
+    this.dialog.open(ConnectionErrorComponent, this.getDialogConfigForSmallScreen());
+  }
+
+  openConfirmDialog(productId: number, subCategoryId: number) {
+    const dialogRef = this.dialog.open(DeleteDialogComponent,this.getDialogConfigForSmallScreen());
 
     dialogRef.afterClosed().subscribe(async result => {
-      if (result != 'cancel') {
-        remove = true;
-        await this.coffeeHandlerService.removeProduct(productId);
-        this.load();
-        setTimeout(() => this.updateProductList(subCategoryId), 500);
+      if (this.coffeeHandlerService.checkNoDatabaseConnection()) {
+        this.openConnectionError();
+      } else {
+        if (result != 'cancel') {
+          await this.coffeeHandlerService.removeProduct(productId);
+          this.load();
+          setTimeout(() => this.updateProductList(subCategoryId), 500);
+        }
       }
     });
   }

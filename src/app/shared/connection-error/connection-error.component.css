@@ -1,0 +1,56 @@
+::ng-deep .mat-dialog-container {
+    background-color: var(--dialog-bg) !important;
+    border-radius: 0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    padding: 30px 30px 10px 30px;
+    border-radius: 6px;
+}
+
+::ng-deep .mat-dialog-content {
+    padding: 10px 30px 10px 30px;
+}
+
+::ng-deep .mat-dialog-actions {
+    justify-content: end;
+    margin-bottom: 5px;
+}
+
+.confirmation-container h3 {
+    color: var(--dark-brown-2);
+}
+
+.confirmation-container h4 {
+    color: var(--dark-brown-2);
+    font-family: "Manrope", sans-serif;
+    font-weight: lighter;
+    text-transform: none;
+    text-align: center;
+}
+
+.confirmation-container .mat-dialog-actions{
+    justify-content: center;
+}
+
+.confirmation-container button {
+    min-width: 120px;
+    padding: 10px 10px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.confirmation-container button:hover {
+    background-color: var(--secondary_color) !important;
+    color: var(--dark-brown-2) !important;
+}
+
+.confirmation-container button:last-child {
+    background-color: white;
+    color: var(--dark-brown-2);
+}
+
+@media only screen and (max-width: 600px) {
+    .confirmation-container button {
+        min-width: 100px;
+    }
+}
