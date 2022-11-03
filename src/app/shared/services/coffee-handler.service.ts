@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { Category, Product } from './coffee.interface';
 
 @Injectable({
@@ -8,16 +8,33 @@ import { Category, Product } from './coffee.interface';
 })
 export class CoffeeHandlerService {
 
+  private noDatabaseConnection: boolean = false;
+
   constructor(
     private http: HttpClient,
   ) { }
 
+  public getJSON(json: string): Observable<any> {
+    return this.http.get(json);
+  }
+
   public getAllHighlightMenu(): Observable<Product[]> {
-    return this.http.get("http://localhost:8080/products/highlight-menu").pipe(map((res : any) => res));
+    const _mockJsonURL = 'assets/mock-api/highligh-menu.json';
+    return this.http.get("http://localhost:8080/products/highlight-menu").pipe(
+      map((res : any) => res),
+      catchError(() => {
+        this.noDatabaseConnection = true;
+       return this.getJSON(_mockJsonURL);
+      }));
   }
 
   public getAllCategories(): Observable<Category[]> {
-    return this.http.get("http://localhost:8080/categories").pipe(map((res : any) => res));
+    const _mockJsonURL = 'assets/mock-api/all-categories.json';
+    return this.http.get("http://localhost:8080/categories").pipe(
+      map((res : any) => res),
+      catchError(() => {
+       return this.getJSON(_mockJsonURL);
+      }));
   }
 
   public addNewProduct(product: Product) {
@@ -37,10 +54,15 @@ export class CoffeeHandlerService {
   }
 
   public getNewProductBySubCategoryId(subCategoryId: number) {
-    return this.http.get(`http://localhost:8080/products/${subCategoryId}/products`).pipe(map((res : any) => res));
+    return this.http.get(`http://localhost:8080/products/${subCategoryId}/products`).pipe(
+      map((res : any) => res),
+      catchError(err => {
+        console.log('jknkjnjk');
+       return [];
+      }));
   }
 
-  public modifyProduct(produtId: number, product: Product) {
+  public modifyProduct(_produtId: number, product: Product) {
     this.http.post<Product>(`http://localhost:8080/products/${product.id}}`, product).subscribe({
         error: error => {
             console.error('There was an error!', error);
@@ -48,5 +70,8 @@ export class CoffeeHandlerService {
     })
   }
 
+  public checkDatabaseConnection() {
+    return this.noDatabaseConnection;
+  }
 
 }
