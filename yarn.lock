@@ -130,7 +130,7 @@
   dependencies:
     "tslib" "^2.3.0"
 
-"@angular/cdk@14.2.6":
+"@angular/cdk@^14.2.6", "@angular/cdk@14.2.6":
   "integrity" "sha512-sihrwk/0emYbE2X+DOIlan7mohED9pKiH2gQh2hk3Ud8jjeW6VmbaGtTCkjs+HRbFc9/44uDHasizxrKnjseyw=="
   "resolved" "https://registry.npmjs.org/@angular/cdk/-/cdk-14.2.6.tgz"
   "version" "14.2.6"
