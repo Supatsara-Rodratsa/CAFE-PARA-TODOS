@@ -3,6 +3,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 import { CoffeeHandlerService } from './shared/services/coffee-handler.service';
 import { Category, CategoryDTO, Product, SubCategory } from './shared/services/coffee.interface';
 import { UtilitiesService } from './shared/services/utilities.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogComponent } from './shared/dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +18,11 @@ export class AppComponent implements OnInit, OnDestroy {
   public highlightProducts = new BehaviorSubject<Product[] | null>(null);
   public categories = new BehaviorSubject<CategoryDTO[] | null>(null);
   public renderProductsSection = new BehaviorSubject<SubCategory[] | null>(null);
-  // public allCurrentProducts: SubCategory[] | null | undefined;
 
   constructor(
     private coffeeHandlerService: CoffeeHandlerService,
-    private utilitiesService : UtilitiesService
+    private utilitiesService : UtilitiesService,
+    public dialog: MatDialog
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -66,7 +68,28 @@ export class AppComponent implements OnInit, OnDestroy {
   onSelectedCategory(event: CategoryDTO) {
     if (event && event.name) {
       this.renderProductsSection.next(this.utilitiesService.getSubCategoriesByCategoryName(event.name));
+      this.openModal();
     }
+  }
+
+  openModal() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width ='250px';
+    dialogConfig.height = '300px';
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+    id: 1,
+    title: 'Angular For Beginner'
+    };
+
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+    console.log('Dialog was closed')
+    console.log(result)
+
+    });
   }
 
 }
