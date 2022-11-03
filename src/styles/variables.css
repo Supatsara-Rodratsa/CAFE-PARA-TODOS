@@ -1,0 +1,20 @@
+:root {
+  /* Color */
+  --primary_color: #aca69d;
+  --secondary_color: #f5f3f0;
+  --dark-brown: #8a6953;
+  --dark-brown-2: #382E1F;
+  --brown: #ab9587;
+  --light_base: #d7d0c7;
+  --dark: #535353;
+  --border_color: #dadada;
+  --card_bg: #fbfbfb;
+  --gray_color: #6a6a6a;
+  --light_color: #e6e6e6;
+  --light_font: #fffcf3;
+  --dark_font: #8c8980;
+  --light_brown: #efd7c7;
+  --light-gray: #D9D9D9;
+  --dialog-bg: #D7D0C6;
+  --placeholder-color: #BFBFBD;
+}

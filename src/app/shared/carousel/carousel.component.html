@@ -1,0 +1,72 @@
+<div class="carousel" (window:resize)="onResize($event)">
+  <div class="slide-deck">
+    <div class="slide flex-col center">
+      <h1>
+        All-in-One
+        <span class="wave">
+          <span style="--i: 1;">C</span>
+          <span style="--i: 2;">o</span>
+          <span style="--i: 3;">f</span>
+          <span style="--i: 4;">f</span>
+          <span style="--i: 5;">e</span>
+          <span style="--i: 6;">e</span>
+        </span>
+      </h1>
+      <h1>Management System</h1>
+    </div>
+    <div class="slide">
+      <div class="text-layout">
+        <div class="flex-col center">
+          <h2>CAFÉ</h2>
+          <h2>PARA</h2>
+          <h2>TODOS</h2>
+        </div>
+      </div>
+      <div class="circle-object object-layout-1"></div>
+        <div class="circle-smaller-object object-layout-2"></div>
+        <div class="circle-object object-layout-3">
+          <div class="relative-layout">
+            <div class="circle-for-coffee circle-for-coffee-layout">
+              <div class="relative-layout">
+                <img src="assets/sample-coffee/Signature-Chocolate.png" alt="Signature-Chocolate" />
+              </div>
+            </div>
+            <div class="circle-for-coffee circle-for-coffee-layout">
+              <div class="relative-layout">
+                <img src="assets/sample-coffee/White-Chocolate-Mocha-Frappuccino.png" alt="White-Chocolate-Mocha-Frappuccino" />
+              </div>
+            </div>
+            <div class="circle-for-coffee circle-for-coffee-layout">
+              <div class="relative-layout">
+                <img src="assets/sample-coffee/Classic-Chocolate.png" alt="Classic-Chocolate" />
+              </div>
+            </div>
+            <div class="circle-for-coffee circle-for-coffee-layout">
+              <div class="relative-layout">
+                <img src="assets/sample-coffee/Vanilla-Sweet-Cream.png" alt="Vanilla-Sweet-Cream" />
+              </div>
+            </div>
+            <div class="circle-for-coffee circle-for-coffee-layout">
+              <div class="relative-layout">
+                <img src="assets/sample-coffee/Caramel-Macchiato.png" alt="Caramel-Macchiato" />
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  <button class="button prev center disabled">
+    <img src="assets/icons/prev.svg" alt="previous icon" class="icon" (click)="onClickPrevSlide()" />
+  </button>
+  <button class="button next center">
+    <img src="assets/icons/next.svg" alt="previous icon" class="icon" (click)="onClickNextSlide()"/>
+  </button>
+  <div id="current-status" class="outline-layout status-center show-bigger-screen">
+    <div class="flex-row status-center center" [innerHtml]="renderHTML | safeHtml">
+    </div>
+  </div>  
+</div>
+<div id="current-status" class="outline-layout status-center show-smaller-screen">
+  <div class="flex-row status-center center" [innerHtml]="renderHTML | safeHtml">
+  </div>
+</div>

@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;800&display=swap");
+body {
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+}
+
+h1 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 60px;
+  color: var(--light_font);
+}
+
+h2 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 40px;
+  color: var(--light_font);
+}
+
+h3 {
+  font-family: "Libre Baskerville", serif;
+  font-size: 30px;
+  color: var(--light_font);
+}
+
+h4 {
+  font-family: "Abril Fatface", cursive;
+  font-size: 18px;
+  color: var(--primary_color);
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 12px;
+}
+
+.text-tab-card {
+  color: white;
+  font-size: 22px;
+}
+
+label {
+  font-size: 16px;
+}
+
+/* tablet */
+@media only screen and (max-width: 800px) {
+  h1 {
+    font-size: 40px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  h4 {
+    font-size: 16px;
+  }
+
+  p {
+    font-size: 10px;
+  }
+
+  .text-tab-card {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 24px;
+  }
+
+  .text-tab-card {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  h1 {
+    font-size: 20px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  .text-tab-card {
+    font-size: 10px;
+  }
+
+  .header {
+    font-size: 20px !important;
+  }
+}

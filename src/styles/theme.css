@@ -1,0 +1,4 @@
+@import "global.css";
+@import "variables.css";
+@import "typography.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";

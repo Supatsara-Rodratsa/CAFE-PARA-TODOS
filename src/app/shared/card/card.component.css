@@ -1,0 +1,134 @@
+.card-container {
+    width: 230px;
+    height: 280px;
+    position: relative;
+    padding: 25px;
+    background-color: var(--secondary_color);
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.15);
+    margin-right: 40px;
+}
+
+.highlight-image {
+    position: absolute;
+    top: -60px;
+    margin: -30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.highlight-image img {
+    width: 90%;
+}
+
+.full-height {
+    height: 100%;
+    margin-top: 60px;
+}
+
+.card-header {
+    text-align: center;
+}
+
+.card-container h4 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    height: 50px;
+}
+
+.card-container p {
+    margin-top: 10px;
+}
+
+.price-section p {
+    font-size: 14px;
+}
+
+.card-container:hover {
+    transform: scale(1.1);
+    transition: transform .2s ease-in-out, background-color 1s ease-out;
+    background-color: var(--brown);
+}
+
+.card-container:hover h4 {
+    color: var(--light_font);
+}
+
+.card-container:hover p {
+    color: var(--light_font);
+}
+
+.card-container:hover .highlight-image {
+	animation: bounce 2s ease;
+}
+
+.button-section button {
+    width: 100%;
+    margin-top: 15px;
+    border: 1px solid transparent;
+    border-radius: 30px;
+    padding: 7px 3px;
+    cursor: pointer;
+}
+
+.button-section button:first-child {
+    margin-right: 10px;
+    background-color: black;
+    color: var(--light_font);
+}
+
+.button-section button:last-child {
+    background-color: white;
+    color: var(--dark-brown-2);
+}
+
+.button-section button:hover {
+    background-color: var(--dialog-bg);
+    color: var(--dark-brown-2)
+}
+
+.product-details {
+    max-height: 45px;
+    white-space: nowrap;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+@media only screen and (max-width: 800px) {
+    .highlight-image img {
+        width: 80%;
+    }
+
+    .card-container {
+        width: 200px;
+        height: 250px;
+    }
+
+    .full-height{
+        margin-top: 25px;
+    }
+    
+    .price-section p {
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .card-container h4 {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: 40px;
+    }
+}
+

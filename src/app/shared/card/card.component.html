@@ -1,0 +1,26 @@
+<div class="card-container flex-col" *ngIf="product">
+    <div class="highlight-image">
+        <img [src]="product.decodeImage" alt="Highlight Menu">
+    </div>
+    <div class="flex-col space-between full-height">
+        <div class="flex-col">
+            <h4 class="card-header">
+                {{product.name}}
+            </h4>
+            <p class="product-details">
+                {{product.details}}
+            </p>
+        </div>
+        <div class="flex-col">
+            <div class="flex-row space-between price-section">
+                <p >Price</p>
+                <p>&#x20AC;{{product.price | number : '1.2-2'}}</p>
+            </div>
+            <div class="flex-row button-section" *ngIf="!highlightMenu">
+                <button (click)="onClickedDeleteItem()">Delete</button>
+                <button (click)="onClickedModifyItem()">Edit</button>
+            </div>
+        </div>
+        
+    </div>
+</div>
