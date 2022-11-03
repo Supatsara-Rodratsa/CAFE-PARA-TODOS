@@ -68,20 +68,21 @@ export class AppComponent implements OnInit, OnDestroy {
   onSelectedCategory(event: CategoryDTO) {
     if (event && event.name) {
       this.renderProductsSection.next(this.utilitiesService.getSubCategoriesByCategoryName(event.name));
-      this.openModal();
     }
   }
 
-  openModal() {
+  openModal(subCategoryId: number, subCategoryName: string) {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.width ='250px';
-    dialogConfig.height = '300px';
+    dialogConfig.width ='600px';
+    // dialogConfig.height = '300px';
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-    id: 1,
-    title: 'Angular For Beginner'
+      id: subCategoryId,
+      name: subCategoryName
     };
+    dialogConfig.enterAnimationDuration= "1000ms";
+    dialogConfig.exitAnimationDuration= "1000ms";
 
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
 

@@ -38,6 +38,10 @@ p {
   font-size: 22px;
 }
 
+label {
+  font-size: 16px;
+}
+
 /* tablet */
 @media only screen and (max-width: 800px) {
   h1 {

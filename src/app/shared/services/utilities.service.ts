@@ -14,8 +14,8 @@ export class UtilitiesService {
     private _sanitizer: DomSanitizer
   ) { }
 
-  decodeBase64image(img: string | undefined) {
-    return this._sanitizer.bypassSecurityTrustResourceUrl(`data:image/png;base64, ${img}`);
+  decodeBase64image(img: string | undefined, hasType: boolean = false) {
+    return img ? this._sanitizer.bypassSecurityTrustResourceUrl(!hasType ? `data:image/png;base64, ${img}` : img) : undefined;
   }
 
   setAllCategories(categories: Category[]) {

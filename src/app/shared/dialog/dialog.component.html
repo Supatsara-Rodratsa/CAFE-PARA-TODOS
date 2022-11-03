@@ -1,6 +1,36 @@
-<h2 mat-dialog-title>{{modalTitle}}</h2>
-<mat-dialog-content>Do you wish to continue previous shopping?</mat-dialog-content>
-<mat-dialog-actions>
-<button mat-button mat-dialog-close>No</button>
-<button mat-button [mat-dialog-close]="true">Yes</button>
-</mat-dialog-actions>
+<div class="dialog-container">
+    <h3>{{subCategoryName}}<br><span>New Product Details</span></h3>
+    <mat-dialog-content>
+       <div class="flex-row">
+        <div class="add-image">
+            <div class="image-layout">
+                <div class="image-container" (click)="fileUpload.click()">
+                    <div class="flex-col center full-height" *ngIf="!url">
+                        <img src="assets/icons/upload.svg" alt="upload icon" class="icon"/>
+                        <p>Upload picture here!</p>
+                    </div>
+                    <img *ngIf="url" src="{{url}}" alt="upload image" class="uploaded-image"/>
+                    <input type="file" class="file-input"(change)="onFileSelected($event)" #fileUpload> 
+                </div>
+            </div>
+        </div>
+        <form *ngIf="form" [formGroup]="form" class="form">
+            <div class="flex-col">
+                <label>Name:</label>
+                <input type="text" formControlName="name" placeholder="Enter Product Name" autocomplete="off" [ngClass]="form.get('name')?.invalid&& form.get('name')?.touched ? 'error':''" required>
+                <label>Details:</label>
+                <textarea type="text" formControlName="details" placeholder="Enter Product Details" autocomplete="off" [ngClass]="form.get('details')?.invalid&& form.get('details')?.touched ? 'error':''"></textarea>
+                <label>Price:</label>
+                <div class="relative">
+                    <input type="number" formControlName="price" placeholder="0.00" autocomplete="off" [ngClass]="form.get('price')?.invalid&& form.get('price')?.touched ? 'error':''" required><span class="euro">&#x20AC;</span>
+                </div>
+            </div>
+        </form>
+       </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="true">Save</button>
+    </mat-dialog-actions>
+</div>
+
