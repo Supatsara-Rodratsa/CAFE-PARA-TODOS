@@ -56,6 +56,8 @@ export class DialogComponent implements OnInit {
   }
 
   setData() {
+    console.log(this.modifyProduct);
+    
     if (this.form) {
       this.newProduct = {
         name: this.form.get('name')?.value,

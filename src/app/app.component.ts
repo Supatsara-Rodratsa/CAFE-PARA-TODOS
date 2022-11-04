@@ -125,7 +125,7 @@ export class AppComponent implements OnInit, OnDestroy {
             }
           }
           this.load();
-          setTimeout(() => this.updateProductList(subCategoryId), 500);
+          setTimeout(() => this.updateProductList(subCategoryId), 1000);
         }
       }
 

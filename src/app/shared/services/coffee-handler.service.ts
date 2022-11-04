@@ -57,13 +57,12 @@ export class CoffeeHandlerService {
     return this.http.get(`http://localhost:8080/products/${subCategoryId}/products`).pipe(
       map((res : any) => res),
       catchError(err => {
-        console.log('jknkjnjk');
        return [];
       }));
   }
 
-  public modifyProduct(_produtId: number, product: Product) {
-    this.http.post<Product>(`http://localhost:8080/products/${product.id}}`, product).subscribe({
+  public modifyProduct(produtId: number, product: Product) {
+    this.http.put<Product>(`http://localhost:8080/products/${produtId}`, product).subscribe({
         error: error => {
             console.error('There was an error!', error);
         }
