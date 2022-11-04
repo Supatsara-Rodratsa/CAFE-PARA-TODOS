@@ -48,10 +48,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
   load() : void {
     this.isLoading = true;
-    setTimeout( () => {
-      this.isLoading = false;
-      this.starting = false
-    }, 2000 );
+    if (this.starting) {
+      setTimeout( () => {
+        this.isLoading = false;
+        this.starting = false
+      }, 4000 );
+    } else {
+      setTimeout( () => {
+        this.isLoading = false;
+      }, 2000 );
+    }
   }
 
   async getHighlightMenu() {

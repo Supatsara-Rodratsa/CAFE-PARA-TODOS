@@ -22,7 +22,7 @@
       </div>
     </section>
     <section class="products-section">
-      <div class="flex--col"  *ngFor="let element of renderProductsSection.value">
+      <div *ngFor="let element of renderProductsSection.value">
         <div class="flex-row space-between align-end sub-categories">
           <h3 class="header" data-aos="fade-right">{{element.name}}</h3>
           <p *ngIf="element.id && element.name" (click)="openModal(element.id, element.name)" data-aos="fade-right">Add Product</p>
